@@ -17,7 +17,8 @@ export default function Login() {
 
   function logout(e) {
     e.preventDefault();
-    // axios.post("https://qdemy.onrender.com/api/user/logout").then((res) => {
+    //logout
+    // /axios.post("https://qdemy.onrender.com/api/user/logout").then((res) => {
     //   console.log(res);
     // });
     Cookies.remove("jwt");
