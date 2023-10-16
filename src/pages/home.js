@@ -1,28 +1,22 @@
-import Header  from "../comp/header";
-import Footer from "../comp/footer"
-import Coursedetail from '../comp/coursedetails';
+import Header from "../comp/header";
+import Footer from "../comp/footer";
+import Coursedetail from "../comp/coursedetails";
 import Navbar from "../comp/navbar";
-import { useState } from "react";
 
-
-export default function Home(props){
+export default function Home(props) {
   //const [cart,setcart]=useState([]);
-    return(
-        <>
-        <Navbar cart={props.cart}/>
-          <Header/> 
-          <section className="py-5">
-  <div className="container px-4 px-lg-5 mt-5">
-    <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-    
-    <Coursedetail {...props}  />
-      
-    </div>
-  </div>
-</section>
-        <Footer/>
-        </>
-      
-        
-        )
+  return (
+    <>
+      <Navbar cart={props.cart} />
+      <Header />
+      <section className="py-5">
+        <div className="container px-4 px-lg-5 mt-5">
+          <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <Coursedetail {...props} />
+          </div>
+        </div>
+      </section>
+      <Footer />
+    </>
+  );
 }
