@@ -47,6 +47,11 @@ function Navbar(props) {
                 </span>
               </button>
             </Link>
+            <Link to="/login">
+              <button className="btn btn-outline-dark" type="submit">
+                login
+              </button>
+            </Link>
           </form>
         </div>
       </div>

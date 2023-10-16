@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-function Login() {
+export default function Login() {
   const dvalue = {
     email: "",
     password: "",
@@ -80,5 +80,3 @@ function Login() {
     </>
   );
 }
-
-export default Login;
