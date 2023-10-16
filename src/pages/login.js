@@ -25,10 +25,13 @@ export default function Login() {
   }
   function getuser(e) {
     e.preventDefault();
-
+    let additionalCookies = Cookies.get("jwt");
     axios
       .get("https://qdemy.onrender.com/api/user/profile", {
         withCredentials: true,
+        headers: {
+          Accesstoken: additionalCookies,
+        },
       })
       .then((res) => {
         console.log(res.data);
