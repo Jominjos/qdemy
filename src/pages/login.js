@@ -20,6 +20,12 @@ function Login() {
       console.log(res);
     });
   }
+  function getuser(e) {
+    e.preventDefault();
+    axios.get("https://qdemy.onrender.com/api/user/profile").then((res) => {
+      console.log(res.body);
+    });
+  }
   function formsubmitted(e) {
     e.preventDefault();
     const config = {
@@ -69,6 +75,7 @@ function Login() {
         </div>
         <button onClick={formsubmitted}>LOGIN</button>
         <button onClick={logout}>LOGOUT</button>
+        <button onClick={getuser}>get user</button>
       </form>
     </>
   );
