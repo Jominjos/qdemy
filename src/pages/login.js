@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 
 export default function Login() {
@@ -16,15 +17,21 @@ export default function Login() {
 
   function logout(e) {
     e.preventDefault();
-    axios.post("https://qdemy.onrender.com/api/user/logout").then((res) => {
-      console.log(res);
-    });
+    // axios.post("https://qdemy.onrender.com/api/user/logout").then((res) => {
+    //   console.log(res);
+    // });
+    Cookies.remove("jwt");
   }
   function getuser(e) {
     e.preventDefault();
-    axios.get("https://qdemy.onrender.com/api/user/profile").then((res) => {
-      console.log(res.body);
-    });
+
+    axios
+      .get("https://qdemy.onrender.com/api/user/profile", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
   }
   function formsubmitted(e) {
     e.preventDefault();
@@ -38,6 +45,8 @@ export default function Login() {
       .post("https://qdemy.onrender.com/api/user/auth", cred, config)
       .then((res) => {
         console.log(res);
+
+        Cookies.set("jwt", res.data.token, { expires: 7 });
       })
       .catch((error) => {
         if (error.response) {
