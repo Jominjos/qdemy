@@ -16,13 +16,18 @@ export default function Cart(props) {
           </div>
         </header>
       </>
-      <section className="py-5">
+      <section className="py-0 ">
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <Cartdetails {...props} />
           </div>
         </div>
       </section>
+      <div className="text-center mb-5">
+        <button type="button" className="btn btn-dark btn-lg">
+          Check Out
+        </button>
+      </div>
     </>
   );
 }

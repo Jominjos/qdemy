@@ -4,7 +4,6 @@ import Cartcard from "./cartcard";
 
 function Cartdetail({ cart = {}, setcart = {} }) {
   //const [cart,setcart]=useState([]);
-  console.log(cart);
 
   function remFromCart1(data) {
     console.log(data.details);
@@ -15,7 +14,6 @@ function Cartdetail({ cart = {}, setcart = {} }) {
     setcart(cartCopy);
   }
 
-  console.log(cart.details);
   return (
     <>
       {cart.length < 1 ? (

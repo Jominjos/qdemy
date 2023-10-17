@@ -1,16 +1,27 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar(props) {
+  function logout() {
+    const cookies = Cookies.get(); // Get all cookies
+
+    for (const cookieName in cookies) {
+      // Remove each cookie
+      Cookies.remove(cookieName);
+    }
+    axios.post("/api/user/logout").then((res) => console.log(res));
+  }
+  let usersName = "null";
+  if (Cookies.get("username")) {
+    usersName = Cookies.get("username");
+  }
   console.log(props.cart.length);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
-        <Link to="/">
-          <a href="/" className="navbar-brand">
-            Qdemy
-          </a>
-        </Link>
+        <h1>Qdemy</h1>
         <button
           className="navbar-toggler"
           type="button"
@@ -25,21 +36,17 @@ function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li className="nav-item">
-              <Link to="/">
+              <Link to="/home">
                 <a className="nav-link active" aria-current="page" href="#!">
                   Home
                 </a>
               </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#!">
-                About
-              </a>
-            </li>
           </ul>
           <form className="d-flex">
+            <h6 className="me-5 pt-2">{usersName}</h6>
             <Link to="/cart">
-              <button className="btn btn-outline-dark" type="submit">
+              <button className="btn btn-outline-dark me-4" type="submit">
                 <i className="bi-cart-fill me-1" />
                 Cart
                 <span className="badge bg-dark text-white ms-1 rounded-pill">
@@ -48,8 +55,12 @@ function Navbar(props) {
               </button>
             </Link>
             <Link to="/login">
-              <button className="btn btn-outline-dark" type="submit">
-                login
+              <button
+                className="btn btn-outline-dark"
+                type="submit"
+                onClick={logout}
+              >
+                Logout
               </button>
             </Link>
           </form>

@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Card from "./card";
 
+import axios from "axios";
+
 function Coursedetail({ cart = {}, setcart = {} }) {
   const [course, setcourse] = useState([]);
   //const [cart,setcart]=useState([]);
@@ -23,9 +25,10 @@ function Coursedetail({ cart = {}, setcart = {} }) {
   }
 
   useEffect(() => {
-    fetch("courses.json")
-      .then((response) => response.json())
-      .then((data) => setcourse(data.courseDetails));
+    axios
+      .get("/api/courses")
+
+      .then((data) => setcourse(data.data.courseDetails));
   }, []);
 
   function butdisfunc(data) {
