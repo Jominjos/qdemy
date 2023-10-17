@@ -29,7 +29,7 @@ export default function MyContainer() {
           element={<Home cart={cart} setcart={setcart} />}
         ></Route>
       </Route>
-
+      <Route path="/" element={<Login />}></Route>
       <Route path="*" element={<Nopage />}></Route>
     </Routes>
   );
