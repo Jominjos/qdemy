@@ -1,9 +1,16 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar(props) {
+  const navigate = useNavigate();
+  function toHome() {
+    navigate("/home");
+  }
+  function toProfile() {
+    navigate("/profile");
+  }
   function logout() {
     const cookies = Cookies.get(); // Get all cookies
 
@@ -21,7 +28,8 @@ function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
-        <h1>Qdemy</h1>
+        <h1 onClick={toHome}>Qdemy</h1>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -36,15 +44,15 @@ function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li className="nav-item">
-              <Link to="/home">
-                <a className="nav-link active" aria-current="page" href="#!">
-                  Home
-                </a>
-              </Link>
+              <h6 className="pb-0 mb-0" aria-current="page" onClick={toHome}>
+                Home
+              </h6>
             </li>
           </ul>
           <form className="d-flex">
-            <h6 className="me-5 pt-2">{usersName}</h6>
+            <h6 onClick={toProfile} className="me-5 pt-2">
+              {usersName}
+            </h6>
             <Link to="/cart">
               <button className="btn btn-outline-dark me-4" type="submit">
                 <i className="bi-cart-fill me-1" />

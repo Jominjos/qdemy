@@ -8,8 +8,12 @@ import Login from "../pages/login";
 import SignUp from "../pages/signUp";
 import axios from "axios";
 import PrivateRoutes from "../utils/privateRoute";
+import Profile from "../pages/profile";
 
 axios.defaults.baseURL = "https://qdemy.onrender.com";
+//http://localhost:6003
+//https://qdemy.onrender.com
+
 export default function MyContainer() {
   const [cart, setcart] = useState([]);
 
@@ -27,6 +31,10 @@ export default function MyContainer() {
         <Route
           path="/home"
           element={<Home cart={cart} setcart={setcart} />}
+        ></Route>
+        <Route
+          path="/profile"
+          element={<Profile cart={cart} setcart={setcart} />}
         ></Route>
       </Route>
       <Route path="/" element={<Login />}></Route>
