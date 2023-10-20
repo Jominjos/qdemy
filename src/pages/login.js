@@ -61,7 +61,7 @@ export default function Login() {
                   <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                     Login
                   </p>
-                  <form className="mx-1 mx-md-4">
+                  <form onSubmit={formsubmitted} className="mx-1 mx-md-4">
                     <div className="d-flex flex-row align-items-center mb-4">
                       <i className="fas fa-envelope fa-lg me-3 fa-fw" />
                       <div className="form-outline flex-fill mb-0">
@@ -72,6 +72,7 @@ export default function Login() {
                           value={cred.email}
                           onChange={formchange}
                           className="form-control"
+                          required
                         />
                         <label className="form-label" htmlFor="form3Example3c">
                           Email
@@ -82,6 +83,7 @@ export default function Login() {
                       <i className="fas fa-lock fa-lg me-3 fa-fw" />
                       <div className="form-outline flex-fill mb-0">
                         <input
+                          required
                           placeholder="password"
                           type="password"
                           name="password"
@@ -96,11 +98,7 @@ export default function Login() {
                     </div>
 
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button
-                        type="button"
-                        className="btn btn-dark btn-lg"
-                        onClick={formsubmitted}
-                      >
+                      <button type="submit" className="btn btn-dark btn-lg">
                         Login
                       </button>
                     </div>
