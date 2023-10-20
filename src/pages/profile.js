@@ -28,7 +28,7 @@ function Profile(props) {
 
   return (
     <>
-      <Navbar cart={props.cart} />
+      <Navbar />
       <div>
         <section className="bg-light">
           <div className="container">

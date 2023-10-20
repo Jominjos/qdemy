@@ -3,7 +3,7 @@ import "./card.css";
 import Star from "./star";
 import Cookies from "js-cookie";
 
-function Card({ details = {}, butdisabled = {}, remdisabled = {} }) {
+function Card({ details = {} }) {
   let rate = details.rating;
 
   function addToCart(data) {
@@ -18,7 +18,11 @@ function Card({ details = {}, butdisabled = {}, remdisabled = {} }) {
       withCredentials: true,
     };
     console.log(data);
-    axios.post("/api/user/cart", item, head).then((res) => console.log(res));
+    axios.post("/api/user/cart", item, head).then((res) => {
+      if (res.data.alert) {
+        alert(res.data.message);
+      }
+    });
   }
   return (
     <div className="col mb-5 cards" id="card">
@@ -44,15 +48,8 @@ function Card({ details = {}, butdisabled = {}, remdisabled = {} }) {
             <button
               className="btn btn-outline-dark mt-auto"
               onClick={() => addToCart(details)}
-              disabled={butdisabled}
             >
               Add to Cart
-            </button>
-            <button
-              className="btn btn-outline-dark mt-auto  "
-              disabled={remdisabled}
-            >
-              Remove
             </button>
           </div>
         </div>

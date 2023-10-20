@@ -7,7 +7,7 @@ export default function Home(props) {
   //const [cart,setcart]=useState([]);
   return (
     <>
-      <Navbar cart={props.cart} />
+      <Navbar />
       <Header />
       <section className="py-5">
         <div className="container px-4 px-lg-5 mt-5">

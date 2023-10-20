@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar(props) {
+function Navbar() {
   const navigate = useNavigate();
 
   function logout() {
@@ -56,9 +56,7 @@ function Navbar(props) {
               <button className="btn btn-outline-dark me-4" type="submit">
                 <i className="bi-cart-fill me-1" />
                 Cart
-                <span className="badge bg-dark text-white ms-1 rounded-pill">
-                  {props.cart.length}
-                </span>
+                <span className="badge bg-dark text-white ms-1 rounded-pill"></span>
               </button>
             </Link>
             <Link to="/login">
