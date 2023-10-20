@@ -8,21 +8,6 @@ function Coursedetail({ cart = {}, setcart = {} }) {
   const [course, setcourse] = useState([]);
   //const [cart,setcart]=useState([]);
   console.log(course);
-  function addToCart(data) {
-    console.log(data.details);
-    let data1 = data.details;
-    let cartCopy = [...cart];
-    cartCopy.push(data1);
-    setcart(cartCopy);
-  }
-  function remFromCart(data) {
-    console.log(data.details);
-    let cartCopy = [...cart];
-    let idToRemove = data.details.courseId;
-
-    cartCopy = cartCopy.filter((item) => item.courseId !== idToRemove);
-    setcart(cartCopy);
-  }
 
   useEffect(() => {
     axios
@@ -59,8 +44,6 @@ function Coursedetail({ cart = {}, setcart = {} }) {
           <Card
             details={data}
             key={data.courseId}
-            addToCart={addToCart}
-            remFromCart={remFromCart}
             butdisabled={butdisfunc(data.courseId)}
             remdisabled={remdisabled(data.courseId)}
           />

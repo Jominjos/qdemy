@@ -41,6 +41,7 @@ export default function Login() {
         if (error.response) {
           console.error("Error Status:", error.response.status);
           console.error("Error Data:", error.response.data);
+          alert("email or password incorrect");
         } else {
           console.error("An unexpected error occurred:", error.message);
         }

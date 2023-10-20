@@ -1,13 +1,27 @@
 import "./card.css";
-function Cartcard({
-  details = {},
-  addToCart = {},
-  butdisabled = {},
-  remdisabled = {},
-  remFromCart1 = {},
-  cart = {},
-}) {
+import axios from "axios";
+import Cookies from "js-cookie";
+
+function Cartcard({ details = {}, setCartChange }) {
   console.log(details);
+  function remFromCart1(data) {
+    let item = { id: data._id };
+    console.log(item);
+    let token = Cookies.get("token");
+    const head = {
+      headers: {
+        "Content-Type": "application/json",
+        token,
+      },
+
+      withCredentials: true,
+    };
+
+    axios.put("/api/user/cart", item, head).then((res) => {
+      console.log(res);
+      setCartChange((prev) => !prev);
+    });
+  }
 
   return (
     <>
@@ -28,7 +42,7 @@ function Cartcard({
           <div className="card-footer text-center p-4 pt-0 border-top-0 bg-transparent">
             <button
               className="btn btn-outline-dark mt-auto  "
-              onClick={() => remFromCart1({ details })}
+              onClick={() => remFromCart1(details)}
             >
               Remove
             </button>

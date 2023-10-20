@@ -10,7 +10,8 @@ import axios from "axios";
 import PrivateRoutes from "../utils/privateRoute";
 import Profile from "../pages/profile";
 
-axios.defaults.baseURL = "https://qdemy.onrender.com";
+axios.defaults.baseURL = "http://localhost:6003";
+
 //http://localhost:6003
 //https://qdemy.onrender.com
 
