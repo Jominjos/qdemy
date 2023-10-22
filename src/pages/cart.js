@@ -6,6 +6,15 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 export default function Cart() {
+  let token = Cookies.get("token");
+  const head = {
+    headers: {
+      "Content-Type": "application/json",
+      token,
+    },
+
+    withCredentials: true,
+  };
   const [userCartData, setUserCartData] = useState({});
   const [CartChange, setCartChange] = useState(true);
   useEffect(() => {
@@ -24,6 +33,50 @@ export default function Cart() {
     });
   }, [CartChange]);
 
+  //check out
+  //
+  //
+  const initPayment = (data) => {
+    const options = {
+      key: "rzp_test_63i4zIRkULzdJE",
+
+      amount: data.amount,
+      currency: data.currency,
+      name: "book.name",
+      description: "Test Transaction",
+
+      order_id: data.id,
+      handler: async (response) => {
+        try {
+          const { data } = await axios.post(
+            "/api/payment/verify",
+            response,
+            head
+          );
+          console.log(data);
+          alert(data.message);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      theme: {
+        color: "#000000",
+      },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  //order creation
+  const handlePayment = async () => {
+    try {
+      const { data } = await axios.post("/api/payment/order", { amount: 100 });
+      console.log(data);
+      initPayment(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Navbar cart={userCartData} />
@@ -50,7 +103,11 @@ export default function Cart() {
       <div className="text-center mb-5">
         {userCartData.length > 0 ? (
           <>
-            <button type="button" className="btn btn-dark btn-lg">
+            <button
+              onClick={handlePayment}
+              type="button"
+              className="btn btn-dark btn-lg"
+            >
               Check Out
             </button>
           </>
