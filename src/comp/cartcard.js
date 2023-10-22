@@ -1,10 +1,14 @@
 import "./card.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
+import ClipLoader from "react-spinners/ClipLoader";
 function Cartcard({ details = {}, setCartChange }) {
+  let [loading, setLoading] = useState(false);
   console.log(details);
   function remFromCart1(data) {
+    setLoading(true);
     let item = { id: data._id };
     console.log(item);
     let token = Cookies.get("token");
@@ -20,6 +24,7 @@ function Cartcard({ details = {}, setCartChange }) {
     axios.put("/api/user/cart", item, head).then((res) => {
       console.log(res);
       setCartChange((prev) => !prev);
+      //setLoading(false);
     });
   }
 
@@ -40,12 +45,16 @@ function Cartcard({ details = {}, setCartChange }) {
           </div>
           {/* Product actions*/}
           <div className="card-footer text-center p-4 pt-0 border-top-0 bg-transparent">
-            <button
-              className="btn btn-outline-dark mt-auto  "
-              onClick={() => remFromCart1(details)}
-            >
-              Remove
-            </button>
+            {loading ? (
+              <ClipLoader loading={loading} />
+            ) : (
+              <button
+                className="btn btn-outline-dark mt-auto  "
+                onClick={() => remFromCart1(details)}
+              >
+                Remove
+              </button>
+            )}
           </div>
         </div>
       </div>

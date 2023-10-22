@@ -1,10 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
-
+import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
+  let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dvalue = {
     email: "",
@@ -20,6 +21,7 @@ export default function Login() {
 
   function formsubmitted(e) {
     e.preventDefault();
+    setLoading(true);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -38,6 +40,7 @@ export default function Login() {
         navigate("/home");
       })
       .catch((error) => {
+        setLoading(false);
         if (error.response) {
           console.error("Error Status:", error.response.status);
           console.error("Error Data:", error.response.data);
@@ -98,9 +101,13 @@ export default function Login() {
                     </div>
 
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" className="btn btn-dark btn-lg">
-                        Login
-                      </button>
+                      {loading ? (
+                        <ClipLoader loading={loading} />
+                      ) : (
+                        <button type="submit" className="btn btn-dark btn-lg">
+                          Login
+                        </button>
+                      )}
                     </div>
                   </form>
                 </div>

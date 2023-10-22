@@ -1,12 +1,15 @@
 import axios from "axios";
+
 import "./card.css";
 import Star from "./star";
 import Cookies from "js-cookie";
-
+import ClipLoader from "react-spinners/ClipLoader";
+import { useState } from "react";
 function Card({ details = {} }) {
   let rate = details.rating;
-
+  let [loading, setLoading] = useState(false);
   function addToCart(data) {
+    setLoading(true);
     let item = { id: data._id };
     let token = Cookies.get("token");
     const head = {
@@ -22,6 +25,7 @@ function Card({ details = {} }) {
       if (res.data.alert) {
         alert(res.data.message);
       }
+      setLoading(false);
     });
   }
   return (
@@ -45,12 +49,16 @@ function Card({ details = {} }) {
         {/* Product actions*/}
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
           <div className="text-center but-con">
-            <button
-              className="btn btn-outline-dark mt-auto"
-              onClick={() => addToCart(details)}
-            >
-              Add to Cart
-            </button>
+            {loading ? (
+              <ClipLoader loading={loading} />
+            ) : (
+              <button
+                className="btn btn-outline-dark mt-auto"
+                onClick={() => addToCart(details)}
+              >
+                Add to Cart
+              </button>
+            )}
           </div>
         </div>
       </div>

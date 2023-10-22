@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "../styles/signup.css";
-
+import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 export default function SignUp() {
+  let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
@@ -20,6 +21,7 @@ export default function SignUp() {
 
   function formsubmitted(event) {
     event.preventDefault();
+    setLoading(true);
     if (user.pass1 === user.pass2) {
       formSub();
       async function formSub() {
@@ -31,12 +33,14 @@ export default function SignUp() {
           alert("user Created successfully ");
           navigate("/login");
         } catch (err) {
+          setLoading(false);
           alert("user name or email already exist");
           console.log(err);
         }
       }
     } else {
       alert("password mismatch");
+      setLoading(false);
     }
 
     console.log("form submitted");
@@ -127,9 +131,13 @@ export default function SignUp() {
                     </div>
 
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" className="btn btn-dark btn-lg">
-                        Register
-                      </button>
+                      {loading ? (
+                        <ClipLoader loading={loading} />
+                      ) : (
+                        <button type="submit" className="btn btn-dark btn-lg">
+                          Register
+                        </button>
+                      )}
                     </div>
                   </form>
                 </div>

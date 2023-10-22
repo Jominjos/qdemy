@@ -48,9 +48,13 @@ export default function Cart() {
         </div>
       </section>
       <div className="text-center mb-5">
-        <button type="button" className="btn btn-dark btn-lg">
-          Check Out
-        </button>
+        {userCartData.length > 0 ? (
+          <>
+            <button type="button" className="btn btn-dark btn-lg">
+              Check Out
+            </button>
+          </>
+        ) : null}
       </div>
     </>
   );
