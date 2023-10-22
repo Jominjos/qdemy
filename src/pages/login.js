@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Login() {
   let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -12,7 +14,9 @@ export default function Login() {
     password: "",
   };
   const [cred, setCred] = useState(dvalue);
-
+  const Notify = () => {
+    toast.error("email or password incorrect");
+  };
   function formchange(event) {
     const [name, value] = [event.target.name, event.target.value];
     setCred((prev) => ({ ...prev, [name]: value }));
@@ -41,10 +45,11 @@ export default function Login() {
       })
       .catch((error) => {
         setLoading(false);
+
         if (error.response) {
           console.error("Error Status:", error.response.status);
           console.error("Error Data:", error.response.data);
-          alert("email or password incorrect");
+          Notify();
         } else {
           console.error("An unexpected error occurred:", error.message);
         }
@@ -55,6 +60,7 @@ export default function Login() {
   return (
     <>
       <Authnavbar />
+      <ToastContainer position={toast.POSITION.TOP_CENTER} autoClose={3000} />
       <section className="vh-100" style={{ backgroundColor: "#eee" }}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">

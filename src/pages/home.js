@@ -3,7 +3,7 @@ import Footer from "../comp/footer";
 import Coursedetail from "../comp/coursedetails";
 import Navbar from "../comp/navbar";
 
-export default function Home(props) {
+export default function Home() {
   //const [cart,setcart]=useState([]);
   return (
     <>
@@ -12,7 +12,7 @@ export default function Home(props) {
       <section className="py-5">
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <Coursedetail {...props} />
+            <Coursedetail />
           </div>
         </div>
       </section>

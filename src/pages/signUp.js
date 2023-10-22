@@ -4,6 +4,11 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+//
+//
+//
 export default function SignUp() {
   let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -13,6 +18,13 @@ export default function SignUp() {
     pass1: "",
     pass2: "",
   });
+
+  const NotifyE = (d) => {
+    toast.error(d);
+  };
+  const NotifyS = (d) => {
+    toast.success(d);
+  };
 
   function userChange(event) {
     const [name, value] = [event.target.name, event.target.value];
@@ -30,16 +42,18 @@ export default function SignUp() {
             ...user,
             password: user.pass1,
           });
-          alert("user Created successfully ");
-          navigate("/login");
+          NotifyS("user Created successfully ");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         } catch (err) {
           setLoading(false);
-          alert("user name or email already exist");
+          NotifyE("user name or email already exist");
           console.log(err);
         }
       }
     } else {
-      alert("password mismatch");
+      NotifyE("password mismatch");
       setLoading(false);
     }
 
@@ -49,6 +63,7 @@ export default function SignUp() {
   return (
     <>
       <Authnavbar />
+      <ToastContainer position={toast.POSITION.TOP_CENTER} autoClose={3000} />
       <section className="vh-100" style={{ backgroundColor: "#eee" }}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">

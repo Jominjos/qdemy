@@ -1,11 +1,18 @@
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./card.css";
 import Star from "./star";
 import Cookies from "js-cookie";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from "react";
 function Card({ details = {} }) {
+  const Notify = (d) => {
+    toast.error(d);
+  };
+  const Notifys = (d) => {
+    toast.success(d);
+  };
   let rate = details.rating;
   let [loading, setLoading] = useState(false);
   function addToCart(data) {
@@ -23,13 +30,16 @@ function Card({ details = {} }) {
     console.log(data);
     axios.post("/api/user/cart", item, head).then((res) => {
       if (res.data.alert) {
-        alert(res.data.message);
+        Notify(res.data.message);
+      } else {
+        Notifys("Item added to Cart");
       }
       setLoading(false);
     });
   }
   return (
     <div className="col mb-5 cards" id="card">
+      <ToastContainer position={toast.POSITION.TOP_CENTER} autoClose={500} />
       <div className="card h-100">
         {/* Product image*/}
         <img className="img-fluid " src={details.courseimg} alt="..." />
