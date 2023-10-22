@@ -1,11 +1,15 @@
 import axios from "axios";
 import Cartdetails from "../comp/cartdetails";
-
+import { ClipLoader } from "react-spinners";
 import Navbar from "../comp/navbar";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
+  const navigate = useNavigate();
+  let [loading, setLoading] = useState(false);
+
   let token = Cookies.get("token");
   const head = {
     headers: {
@@ -42,7 +46,7 @@ export default function Cart() {
 
       amount: data.amount,
       currency: data.currency,
-      name: "book.name",
+      name: "Qdemy",
       description: "Test Transaction",
 
       order_id: data.id,
@@ -54,6 +58,8 @@ export default function Cart() {
             head
           );
           console.log(data);
+          navigate("/home");
+
           alert(data.message);
         } catch (error) {
           console.log(error);
@@ -65,12 +71,18 @@ export default function Cart() {
     };
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
+    setLoading(false);
   };
 
   //order creation
   const handlePayment = async () => {
+    setLoading(true);
     try {
-      const { data } = await axios.post("/api/payment/order", { amount: 100 });
+      const { data } = await axios.post(
+        "/api/payment/order",
+        { amount: 100 },
+        head
+      );
       console.log(data);
       initPayment(data.data);
     } catch (error) {
@@ -103,13 +115,17 @@ export default function Cart() {
       <div className="text-center mb-5">
         {userCartData.length > 0 ? (
           <>
-            <button
-              onClick={handlePayment}
-              type="button"
-              className="btn btn-dark btn-lg"
-            >
-              Check Out
-            </button>
+            {loading ? (
+              <ClipLoader loading={loading} />
+            ) : (
+              <button
+                onClick={handlePayment}
+                type="button"
+                className="btn btn-dark btn-lg"
+              >
+                Check Out
+              </button>
+            )}
           </>
         ) : null}
       </div>
