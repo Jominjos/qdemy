@@ -31,7 +31,7 @@ export default function Cart() {
       withCredentials: true,
     };
     axios.get("/api/user/cart", config).then((res) => {
-      console.log(res.data.messg);
+      //console.log(res.data.messg);
       let userCartData = res.data.messg.dbdata[0].cart;
       setUserCartData(userCartData);
     });
@@ -57,12 +57,12 @@ export default function Cart() {
             response,
             head
           );
-          console.log(data);
+          //console.log(data);
           navigate("/home");
 
           alert(data.message);
         } catch (error) {
-          console.log(error);
+          //console.log(error);
         }
       },
       theme: {
@@ -83,10 +83,10 @@ export default function Cart() {
         { amount: 100 },
         head
       );
-      console.log(data);
+      //console.log(data);
       initPayment(data.data);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
   return (

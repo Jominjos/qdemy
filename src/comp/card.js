@@ -27,7 +27,7 @@ function Card({ details = {} }) {
 
       withCredentials: true,
     };
-    console.log(data);
+    //console.log(data);
     axios.post("/api/user/cart", item, head).then((res) => {
       if (res.data.alert) {
         Notify(res.data.message);

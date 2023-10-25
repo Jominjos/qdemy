@@ -22,7 +22,7 @@ function Profile(props) {
       let user_name = res.data.message.name;
       let user_email = res.data.message.email;
       setUser({ user_name, user_email });
-      console.log(user_name);
+      //console.log(user_name);
     });
   }, []);
 

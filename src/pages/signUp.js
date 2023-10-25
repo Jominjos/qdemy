@@ -49,7 +49,7 @@ export default function SignUp() {
         } catch (err) {
           setLoading(false);
           NotifyE("user name or email already exist");
-          console.log(err);
+          //console.log(err);
         }
       }
     } else {
@@ -57,9 +57,9 @@ export default function SignUp() {
       setLoading(false);
     }
 
-    console.log("form submitted");
+    //console.log("form submitted");
   }
-  console.log(user);
+  //console.log(user);
   return (
     <>
       <Authnavbar />

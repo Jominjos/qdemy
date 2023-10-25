@@ -6,11 +6,11 @@ import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 function Cartcard({ details = {}, setCartChange }) {
   let [loading, setLoading] = useState(false);
-  console.log(details);
+  // console.log(details);
   function remFromCart1(data) {
     setLoading(true);
     let item = { id: data._id };
-    console.log(item);
+    // console.log(item);
     let token = Cookies.get("token");
     const head = {
       headers: {
@@ -22,7 +22,7 @@ function Cartcard({ details = {}, setCartChange }) {
     };
 
     axios.put("/api/user/cart", item, head).then((res) => {
-      console.log(res);
+      //console.log(res);
       setCartChange((prev) => !prev);
       //setLoading(false);
     });

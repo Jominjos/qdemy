@@ -21,7 +21,7 @@ export default function Login() {
     const [name, value] = [event.target.name, event.target.value];
     setCred((prev) => ({ ...prev, [name]: value }));
   }
-  console.log(cred);
+  //console.log(cred);
 
   function formsubmitted(e) {
     e.preventDefault();
@@ -36,7 +36,7 @@ export default function Login() {
     axios
       .post("/api/user/auth", cred, config)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
 
         Cookies.set("token", res.data.token, { expires: 7 });
         Cookies.set("username", res.data.username, { expires: 7 });

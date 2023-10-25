@@ -8,10 +8,10 @@ import { ClipLoader } from "react-spinners";
 function Coursedetail() {
   const [course, setcourse] = useState([]);
 
-  console.log(course);
+  //console.log(course);
 
   useEffect(() => {
-    console.log("fetching from server");
+    //console.log("fetching from server");
     axios
       .get("/api/courses")
 
