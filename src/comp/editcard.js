@@ -17,12 +17,10 @@ function Editcard({ details = {} }) {
     console.log(data);
     let detail = { ...data };
     setLoading(true);
-    axios
-      .post("http://localhost:6003/api/courses/del", { ...detail })
-      .then((res) => {
-        console.log(res);
-        setLoading(false);
-      });
+    axios.post("/api/courses/del", { ...detail }).then((res) => {
+      console.log(res);
+      setLoading(false);
+    });
   }
 
   return (

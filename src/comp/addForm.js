@@ -40,7 +40,7 @@ const AddcourseForm = () => {
     setSLoading(true);
     let valu = { ...form_input };
     //console.log(valu);
-    axios.post("http://localhost:6003/api/courses", { ...valu }).then((res) => {
+    axios.post("/api/courses", { ...valu }).then((res) => {
       console.log(res);
 
       setSLoading(false);
