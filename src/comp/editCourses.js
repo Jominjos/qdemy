@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Card from "./card";
+import Editcard from "./editcard";
 
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 
-function Coursedetail() {
+function Editcoursedetail() {
   const [course, setcourse] = useState([]);
 
   //console.log(course);
@@ -23,7 +23,7 @@ function Coursedetail() {
       {course && course.length < 1 ? (
         <ClipLoader loading={true} />
       ) : (
-        course.map((data) => <Card details={data} key={data._id} />)
+        course.map((data) => <Editcard details={data} key={data._id} />)
       )}
 
       {/* {course &&
@@ -33,4 +33,4 @@ function Coursedetail() {
   );
 }
 
-export default Coursedetail;
+export default Editcoursedetail;
