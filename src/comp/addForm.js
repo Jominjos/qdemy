@@ -80,7 +80,9 @@ const AddcourseForm = () => {
   // }
   return (
     <div>
-      <h2>Add course</h2>
+      <h2 id="addHeading" style={{ textAlign: "center" }}>
+        Add course
+      </h2>
       <div id="form-con" className="d-flex justify-content-center">
         <form className="stu-form " id="addForm" onSubmit={formSubmit}>
           <div className="mb-3">
@@ -125,7 +127,7 @@ const AddcourseForm = () => {
           <div className="d-flex align-items-center">
             <button
               type="submit"
-              className="btn btn-primary align-items-center d-flex me-2 "
+              className="btn btn-dark align-items-center d-flex me-2 "
             >
               <ClipLoader color="#ffffff" loading={Sloading} size={10} />
               Submit
@@ -133,7 +135,7 @@ const AddcourseForm = () => {
 
             <button
               type="reset"
-              className="btn btn-danger ms-2"
+              className="btn btn-outline-dark ms-2"
               onClick={formreset}
             >
               Reset
