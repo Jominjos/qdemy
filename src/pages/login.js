@@ -28,7 +28,7 @@ export default function Login() {
     setLoading(true);
 
     axios
-      .post("/api/user/auth", cred)
+      .post("https://qdemy.onrender.com/api/user/auth", cred)
       .then((res) => {
         //console.log(res);
 
