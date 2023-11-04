@@ -1,9 +1,9 @@
 import "./card.css";
-import axios from "axios";
-import Cookies from "js-cookie";
+
 import { useState } from "react";
 
 import ClipLoader from "react-spinners/ClipLoader";
+import { axiosInstance } from "../api/axios";
 function Cartcard({ details = {}, setCartChange }) {
   let [loading, setLoading] = useState(false);
   // console.log(details);
@@ -11,17 +11,8 @@ function Cartcard({ details = {}, setCartChange }) {
     setLoading(true);
     let item = { id: data._id };
     // console.log(item);
-    let token = Cookies.get("token");
-    const head = {
-      headers: {
-        "Content-Type": "application/json",
-        token,
-      },
 
-      withCredentials: true,
-    };
-
-    axios.put("/api/user/cart", item, head).then((res) => {
+    axiosInstance.put("/api/user/cart", item).then((res) => {
       //console.log(res);
       setCartChange((prev) => !prev);
       //setLoading(false);

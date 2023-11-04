@@ -2,8 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Card from "./card";
 
-import axios from "axios";
+//import axios from "axios";
 import { ClipLoader } from "react-spinners";
+import { axiosInstance } from "../api/axios";
+//import Cookies from "js-cookie";
+//import axiosWithToken from "../api/axios";
+//import axiosInstance from "../api/axios";
 
 function Coursedetail() {
   const [course, setcourse] = useState([]);
@@ -12,10 +16,15 @@ function Coursedetail() {
 
   useEffect(() => {
     //console.log("fetching from server");
-    axios
+
+    axiosInstance
       .get("/api/courses")
 
-      .then((data) => setcourse(data.data.courseDetails));
+      .then((data) => setcourse(data.data.courseDetails))
+      .catch((error) => {
+        // Handle the error, e.g., log it
+        console.error("An error occurred:", error);
+      });
   }, []);
 
   return (

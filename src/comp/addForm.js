@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 import { ClipLoader } from "react-spinners";
 import "../styles/addcourse.css";
-import axios from "axios";
 
-const AddcourseForm = () => {
+import { axiosInstance } from "../api/axios";
+
+const AddcourseForm = ({ setDbchange }) => {
   //   const [Eloading, setELoading] = useState(false);
   const dvalue = { courseName: "", courseimg: "", fees: "" };
   const [Sloading, setSLoading] = useState(false);
@@ -40,9 +41,10 @@ const AddcourseForm = () => {
     setSLoading(true);
     let valu = { ...form_input };
     //console.log(valu);
-    axios.post("/api/courses", { ...valu }).then((res) => {
-      console.log(res);
 
+    axiosInstance.post("/api/courses", { ...valu }).then((res) => {
+      console.log(res);
+      setDbchange((prev) => !prev);
       setSLoading(false);
     });
 
@@ -80,7 +82,7 @@ const AddcourseForm = () => {
   // }
   return (
     <div>
-      <h2 id="addHeading" style={{ textAlign: "center" }}>
+      <h2 id="addHeading" className="text-center">
         Add course
       </h2>
       <div id="form-con" className="d-flex justify-content-center">

@@ -26,21 +26,21 @@ export default function Login() {
   function formsubmitted(e) {
     e.preventDefault();
     setLoading(true);
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
 
     axios
-      .post("/api/user/auth", cred, config)
+      .post("/api/user/auth", cred)
       .then((res) => {
         //console.log(res);
 
         Cookies.set("token", res.data.token, { expires: 7 });
         Cookies.set("username", res.data.username, { expires: 7 });
 
+        // const jwt_token = Cookies.get("token");
+        // if (jwt_token) {
+        //   axios.defaults.headers.common["token"] = jwt_token;
+        // }
+      })
+      .then(() => {
         navigate("/home");
       })
       .catch((error) => {

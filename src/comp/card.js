@@ -1,11 +1,11 @@
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./card.css";
 import Star from "./star";
-import Cookies from "js-cookie";
+
 import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from "react";
+import { axiosInstance } from "../api/axios";
 function Card({ details = {} }) {
   const Notify = (d) => {
     toast.error(d);
@@ -18,17 +18,9 @@ function Card({ details = {} }) {
   function addToCart(data) {
     setLoading(true);
     let item = { id: data._id };
-    let token = Cookies.get("token");
-    const head = {
-      headers: {
-        "Content-Type": "application/json",
-        token,
-      },
 
-      withCredentials: true,
-    };
     //console.log(data);
-    axios.post("/api/user/cart", item, head).then((res) => {
+    axiosInstance.post("/api/user/cart", item).then((res) => {
       if (res.data.alert) {
         Notify(res.data.message);
       } else {

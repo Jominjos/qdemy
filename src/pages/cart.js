@@ -1,36 +1,23 @@
-import axios from "axios";
 import Cartdetails from "../comp/cartdetails";
 import { ClipLoader } from "react-spinners";
 import Navbar from "../comp/navbar";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { axiosInstance } from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const navigate = useNavigate();
   let [loading, setLoading] = useState(false);
 
-  let token = Cookies.get("token");
-  const head = {
-    headers: {
-      "Content-Type": "application/json",
-      token,
-    },
-
-    withCredentials: true,
-  };
   const [userCartData, setUserCartData] = useState({});
   const [CartChange, setCartChange] = useState(true);
   useEffect(() => {
-    let token = Cookies.get("token");
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        token,
-      },
-      withCredentials: true,
-    };
-    axios.get("/api/user/cart", config).then((res) => {
+    // const jwt_token = Cookies.get("token");
+    // if (jwt_token) {
+    //   axios.defaults.headers.common["token"] = jwt_token;
+
+    // }
+    axiosInstance.get("/api/user/cart").then((res) => {
       //console.log(res.data.messg);
       let userCartData = res.data.messg.dbdata[0].cart;
       setUserCartData(userCartData);
@@ -52,10 +39,9 @@ export default function Cart() {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const { data } = await axios.post(
+          const { data } = await axiosInstance.post(
             "/api/payment/verify",
-            response,
-            head
+            response
           );
           //console.log(data);
           navigate("/home");
@@ -78,11 +64,9 @@ export default function Cart() {
   const handlePayment = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.post(
-        "/api/payment/order",
-        { amount: 100 },
-        head
-      );
+      const { data } = await axiosInstance.post("/api/payment/order", {
+        amount: 100,
+      });
       //console.log(data);
       initPayment(data.data);
     } catch (error) {

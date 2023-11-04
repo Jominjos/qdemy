@@ -1,10 +1,10 @@
 import "./card.css";
-import axios from "axios";
 
 import { useState } from "react";
 
 import ClipLoader from "react-spinners/ClipLoader";
-function Editcard({ details = {} }) {
+import { axiosInstance } from "../api/axios";
+function Editcard({ details = {}, setDbchange }) {
   let [loading, setLoading] = useState(false);
 
   // console.log(details);
@@ -17,9 +17,11 @@ function Editcard({ details = {} }) {
     console.log(data);
     let detail = { ...data };
     setLoading(true);
-    axios.post("/api/courses/del", { ...detail }).then((res) => {
+
+    axiosInstance.post("/api/courses/del", { ...detail }).then((res) => {
       console.log(res);
       setLoading(false);
+      setDbchange((prev) => !prev);
     });
   }
 

@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../comp/navbar";
-import axios from "axios";
-import Cookies from "js-cookie";
+
+import { axiosInstance } from "../api/axios";
 
 function Profile(props) {
   const [user, setUser] = useState({
     user_name: "fetching",
     user_email: "fetching",
+    user_role: "fetching",
   });
 
   useEffect(() => {
-    let token = Cookies.get("token");
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        token,
-      },
-      withCredentials: true,
-    };
-    axios.get("/api/user/profile", config).then((res) => {
+    axiosInstance.get("/api/user/profile").then((res) => {
       let user_name = res.data.message.name;
       let user_email = res.data.message.email;
-      setUser({ user_name, user_email });
-      //console.log(user_name);
+      let user_role = res.data.message.role;
+      setUser({ user_name, user_email, user_role });
+      console.log(res.data.message);
     });
   }, []);
 
@@ -53,7 +47,7 @@ function Profile(props) {
                             <span className="display-26 text-secondary me-2 font-weight-600">
                               Role:
                             </span>{" "}
-                            User
+                            {user.user_role}
                           </li>
 
                           <li className="mb-2 mb-xl-3 display-28">

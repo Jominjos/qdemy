@@ -1,7 +1,7 @@
-import axios from "axios";
 import Cookies from "js-cookie";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { axiosInstance } from "../api/axios";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function Navbar() {
       // Remove each cookie
       Cookies.remove(cookieName);
     }
-    axios.post("/api/user/logout").then((res) => console.log(res));
+    axiosInstance.post("/api/user/logout").then((res) => console.log(res));
   }
   let usersName = "null";
   if (Cookies.get("username")) {
