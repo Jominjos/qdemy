@@ -38,7 +38,7 @@ export default function SignUp() {
       formSub();
       async function formSub() {
         try {
-          await axios.post("/api/user/", {
+          await axios.post("https://qdemy.onrender.com/api/user/", {
             ...user,
             password: user.pass1,
           });
