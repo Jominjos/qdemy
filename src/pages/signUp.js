@@ -3,11 +3,12 @@ import "../styles/signup.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //
 //
+
 //
 export default function SignUp() {
   useEffect(() => {
@@ -80,7 +81,7 @@ export default function SignUp() {
                     Sign up
                   </p>
                   <form onSubmit={formsubmitted} className="mx-1 mx-md-4">
-                    <div className="d-flex flex-row align-items-center mb-4">
+                    <div className="d-flex flex-row align-items-center mb-2">
                       <i className="fas fa-user fa-lg me-3 fa-fw" />
                       <div className="form-outline flex-fill mb-0">
                         <input
@@ -98,7 +99,7 @@ export default function SignUp() {
                         </label>
                       </div>
                     </div>
-                    <div className="d-flex flex-row align-items-center mb-4">
+                    <div className="d-flex flex-row align-items-center mb-2">
                       <i className="fas fa-envelope fa-lg me-3 fa-fw" />
                       <div className="form-outline flex-fill mb-0">
                         <input
@@ -115,7 +116,7 @@ export default function SignUp() {
                         </label>
                       </div>
                     </div>
-                    <div className="d-flex flex-row align-items-center mb-4">
+                    <div className="d-flex flex-row align-items-center mb-2 ">
                       <i className="fas fa-lock fa-lg me-3 fa-fw" />
                       <div className="form-outline flex-fill mb-0">
                         <input
@@ -133,7 +134,7 @@ export default function SignUp() {
                         </label>
                       </div>
                     </div>
-                    <div className="d-flex flex-row align-items-center mb-4">
+                    <div className="d-flex flex-row align-items-center mb-2">
                       <i className="fas fa-key fa-lg me-3 fa-fw" />
                       <div className="form-outline flex-fill mb-0">
                         <input
@@ -149,6 +150,9 @@ export default function SignUp() {
                           Re-enter password
                         </label>
                       </div>
+                    </div>
+                    <div className=" ps-3 mb-4">
+                      Existing user ? <Link to={"/login"}>Login</Link>
                     </div>
 
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

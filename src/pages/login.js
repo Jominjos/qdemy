@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { axiosInstance } from "../api/axios";
@@ -117,6 +117,9 @@ export default function Login() {
                           Password
                         </label>
                       </div>
+                    </div>
+                    <div className="mb-4 ps-3">
+                      New user?<Link to={"/signup"}>SignUp</Link>
                     </div>
 
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
