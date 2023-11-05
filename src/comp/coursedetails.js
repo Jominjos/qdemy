@@ -4,18 +4,31 @@ import Card from "./card";
 
 //import axios from "axios";
 import { ClipLoader } from "react-spinners";
+//import { axiosInstance } from "../api/axios";
+//import axios from "axios";
+//import Cookies from "js-cookie";
 import { axiosInstance } from "../api/axios";
 //import Cookies from "js-cookie";
 //import axiosWithToken from "../api/axios";
 //import axiosInstance from "../api/axios";
 
 function Coursedetail() {
-  const [course, setcourse] = useState([]);
+  const [course, setcourse] = useState(false);
 
   //console.log(course);
 
   useEffect(() => {
-    //console.log("fetching from server");
+    console.log("fetching from server");
+
+    // let token = Cookies.get("token");
+    // const head = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     token,
+    //   },
+
+    //   withCredentials: true,
+    // };
 
     axiosInstance
       .get("/api/courses")
@@ -29,10 +42,10 @@ function Coursedetail() {
 
   return (
     <>
-      {course && course.length < 1 ? (
-        <ClipLoader loading={true} />
-      ) : (
+      {course ? (
         course.map((data) => <Card details={data} key={data._id} />)
+      ) : (
+        <ClipLoader loading={true} />
       )}
 
       {/* {course &&

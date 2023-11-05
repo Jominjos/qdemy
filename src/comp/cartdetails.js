@@ -2,7 +2,7 @@ import React from "react";
 
 import Cartcard from "./cartcard";
 
-function Cartdetail({ userCartData = {}, setCartChange }) {
+function Cartdetails({ userCartData = {}, setCartChange }) {
   //const [cart,setcart]=useState([]);
 
   return (
@@ -17,8 +17,8 @@ function Cartdetail({ userCartData = {}, setCartChange }) {
         userCartData.length > 0 &&
         userCartData.map((data, i) => (
           <Cartcard
+            key={data._id}
             details={data}
-            key={data.courseId}
             setCartChange={setCartChange}
           />
         ))
@@ -27,4 +27,4 @@ function Cartdetail({ userCartData = {}, setCartChange }) {
   );
 }
 
-export default Cartdetail;
+export default Cartdetails;

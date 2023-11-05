@@ -9,9 +9,12 @@ import SignUp from "../pages/signUp";
 
 import PrivateRoutes from "../utils/privateRoute";
 import Profile from "../pages/profile";
+import axios from "axios";
+import { axiosInstance } from "../api/axios";
+import Cookies from "js-cookie";
 //import Cookies from "js-cookie";
 
-// axios.defaults.baseURL = "https://qdemy.onrender.com";
+axios.defaults.baseURL = "https://qdemy.onrender.com";
 
 //http://localhost:6003
 //https://qdemy.onrender.com
@@ -19,13 +22,15 @@ import Profile from "../pages/profile";
 
 //axios default headers
 
-// axios.defaults.headers.common["Content-Type"] = "application/json";
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
-//const jwt_token = Cookies.get("token");
-// if (jwt_token) {
-//   axios.defaults.headers.common["token"] = jwt_token;
+const jwt_token = Cookies.get("token");
+if (jwt_token) {
+  axiosInstance.defaults.headers.common["token"] = jwt_token;
+  console.log("setting axios container");
+}
 
 //   // axios.interceptors.request.use(
 //   //   (config) => {

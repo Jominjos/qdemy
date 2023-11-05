@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookies from "js-cookie"; // Import the 'js-cookie' library
+//import Cookies from "js-cookie"; // Import the 'js-cookie' library
 
 //http://localhost:6003
 //https://qdemy.onrender.com
@@ -9,7 +9,7 @@ export const axiosInstance = axios.create({
   baseURL: "https://qdemy.onrender.com", // Set your API base URL
   headers: {
     "Content-Type": "application/json",
-    token: Cookies.get("token"), // Add any authentication headers
+    //token: Cookies.get("token"), // Add any authentication headers
   },
   withCredentials: true,
 });

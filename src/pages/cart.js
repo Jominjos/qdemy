@@ -9,7 +9,7 @@ export default function Cart() {
   const navigate = useNavigate();
   let [loading, setLoading] = useState(false);
 
-  const [userCartData, setUserCartData] = useState({});
+  const [userCartData, setUserCartData] = useState(false);
   const [CartChange, setCartChange] = useState(true);
   useEffect(() => {
     // const jwt_token = Cookies.get("token");
@@ -17,6 +17,7 @@ export default function Cart() {
     //   axios.defaults.headers.common["token"] = jwt_token;
 
     // }
+    console.log("getting cart data");
     axiosInstance.get("/api/user/cart").then((res) => {
       //console.log(res.data.messg);
       let userCartData = res.data.messg.dbdata[0].cart;

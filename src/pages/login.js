@@ -6,6 +6,7 @@ import Authnavbar from "../comp/authnavbar";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { axiosInstance } from "../api/axios";
 export default function Login() {
   let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -31,16 +32,17 @@ export default function Login() {
       .post("https://qdemy.onrender.com/api/user/auth", cred)
       .then((res) => {
         //console.log(res);
-
+        console.log("num1");
         Cookies.set("token", res.data.token, { expires: 7 });
         Cookies.set("username", res.data.username, { expires: 7 });
 
-        // const jwt_token = Cookies.get("token");
-        // if (jwt_token) {
-        //   axios.defaults.headers.common["token"] = jwt_token;
-        // }
+        if (res.data.token) {
+          axiosInstance.defaults.headers.common["token"] = res.data.token;
+          console.log("setting axios from login");
+        }
       })
       .then(() => {
+        console.log("num 2");
         navigate("/home");
       })
       .catch((error) => {
