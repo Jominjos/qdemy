@@ -18,11 +18,19 @@ function Editcard({ details = {}, setDbchange }) {
     let detail = { ...data };
     setLoading(true);
 
-    axiosInstance.post("/api/courses/del", { ...detail }).then((res) => {
-      console.log(res);
-      setLoading(false);
-      setDbchange((prev) => !prev);
-    });
+    axiosInstance
+      .post("/api/courses/del", { ...detail })
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        setDbchange((prev) => !prev);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error("Request failed:", error);
+        alert("Contact SuperAdmin to Delete");
+        setLoading(false);
+      });
   }
 
   return (
