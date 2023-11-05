@@ -22,6 +22,7 @@ export default function Login() {
     const [name, value] = [event.target.name, event.target.value];
     setCred((prev) => ({ ...prev, [name]: value }));
   }
+
   //console.log(cred);
   //wake up server
 
@@ -42,16 +43,19 @@ export default function Login() {
         console.log("num1");
         Cookies.set("token", res.data.token, { expires: 7 });
         Cookies.set("username", res.data.username, { expires: 7 });
+        Cookies.set("role", res.data.role, { expires: 7 });
 
         if (res.data.token) {
           axiosInstance.defaults.headers.common["token"] = res.data.token;
           console.log("setting axios from login");
         }
+        if (res.data.role === "user") {
+          navigate("/home");
+        } else if (res.data.role === "admin") {
+          navigate("/course");
+        }
       })
-      .then(() => {
-        console.log("num 2");
-        navigate("/home");
-      })
+
       .catch((error) => {
         setLoading(false);
 
@@ -84,7 +88,7 @@ export default function Login() {
                       <i className="fas fa-envelope fa-lg me-3 fa-fw" />
                       <div className="form-outline flex-fill mb-0">
                         <input
-                          placeholder="email"
+                          placeholder="abc@gmail.com"
                           type="email"
                           name="email"
                           value={cred.email}
@@ -102,7 +106,7 @@ export default function Login() {
                       <div className="form-outline flex-fill mb-0">
                         <input
                           required
-                          placeholder="password"
+                          placeholder="*****"
                           type="password"
                           name="password"
                           value={cred.password}
@@ -119,12 +123,42 @@ export default function Login() {
                       {loading ? (
                         <ClipLoader loading={loading} />
                       ) : (
-                        <button type="submit" className="btn btn-dark btn-lg">
+                        <button
+                          className="btn btn-dark btn-lg"
+                          onClick={formsubmitted}
+                        >
                           Login
                         </button>
                       )}
                     </div>
                   </form>
+                  <div>
+                    <h4 className="text-center">Demo Credentials</h4>
+                    <div className="d-flex justify-content-evenly">
+                      <button
+                        className="btn btn-outline-dark btn-sm"
+                        onClick={() =>
+                          setCred({
+                            email: "j@gmail.com",
+                            password: "123456",
+                          })
+                        }
+                      >
+                        User
+                      </button>
+                      <button
+                        className="btn btn-outline-dark btn-sm"
+                        onClick={() =>
+                          setCred({
+                            email: "admin@gmail.com",
+                            password: "123456",
+                          })
+                        }
+                      >
+                        Admin
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

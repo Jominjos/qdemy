@@ -7,11 +7,12 @@ import Course from "../pages/courses";
 import Login from "../pages/login";
 import SignUp from "../pages/signUp";
 
-import PrivateRoutes from "../utils/privateRoute";
+import UserRoutes from "../utils/userRoute";
 import Profile from "../pages/profile";
 import axios from "axios";
 import { axiosInstance } from "../api/axios";
 import Cookies from "js-cookie";
+import AdminRoutes from "../utils/adminRoutes";
 //import Cookies from "js-cookie";
 
 axios.defaults.baseURL = "https://qdemy.onrender.com";
@@ -56,10 +57,12 @@ export default function MyContainer() {
       <Route path="/signup" element={<SignUp />}></Route>
 
       <Route path="/login" element={<Login />}></Route>
-      <Route element={<PrivateRoutes />}>
+      <Route element={<UserRoutes />}>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+      </Route>
+      <Route element={<AdminRoutes />}>
         <Route path="/course" element={<Course />}></Route>
       </Route>
       <Route path="/" element={<Login />}></Route>

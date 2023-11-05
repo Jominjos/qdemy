@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Navbar from "../comp/navbar";
 
 import Editcoursedetail from "../comp/editCourses";
 import AddcourseForm from "../comp/addForm";
 import Footer from "../comp/footer";
+import Navadmin from "../comp/Navadmin";
 export default function Courses() {
   const [dbChange, setDbchange] = useState(true);
   return (
     <>
-      <Navbar />
+      <Navadmin />
       <AddcourseForm setDbchange={setDbchange} />
       <section className="py-5">
         <div className="container px-4 px-lg-5 mt-5">
