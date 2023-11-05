@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
 import { useNavigate } from "react-router-dom";
@@ -25,9 +25,12 @@ export default function Login() {
   //console.log(cred);
   //wake up server
 
-  axios.get("https://qdemy.onrender.com/wakeup").then((res) => {
-    console.log(res);
-  });
+  useEffect(() => {
+    axios.get("https://qdemy.onrender.com/wakeup").then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   function formsubmitted(e) {
     e.preventDefault();
     setLoading(true);

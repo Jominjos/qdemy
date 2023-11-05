@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/signup.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import Authnavbar from "../comp/authnavbar";
@@ -10,9 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 //
 //
 export default function SignUp() {
-  axios.get("https://qdemy.onrender.com/wakeup").then((res) => {
-    console.log(res);
-  });
+  useEffect(() => {
+    axios.get("https://qdemy.onrender.com/wakeup").then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState({
