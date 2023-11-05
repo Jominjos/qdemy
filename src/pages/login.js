@@ -23,7 +23,11 @@ export default function Login() {
     setCred((prev) => ({ ...prev, [name]: value }));
   }
   //console.log(cred);
+  //wake up server
 
+  axios.get("https://qdemy.onrender.com/wakeup").then((res) => {
+    console.log(res);
+  });
   function formsubmitted(e) {
     e.preventDefault();
     setLoading(true);

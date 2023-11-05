@@ -10,6 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 //
 //
 export default function SignUp() {
+  axios.get("https://qdemy.onrender.com/wakeup").then((res) => {
+    console.log(res);
+  });
   let [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState({
