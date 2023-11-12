@@ -27,11 +27,15 @@ export default function SignUp() {
   });
 
   const NotifyE = (d) => {
-    toast.error(d);
+    toast.error(d, {
+      autoClose: 1500,
+    });
   };
-  const NotifyS = (d) => {
-    toast.success(d);
-  };
+  // const NotifyS = (d) => {
+  //   toast.success(d, {
+  //     autoClose: 8000,
+  //   });
+  // };
 
   function userChange(event) {
     const [name, value] = [event.target.name, event.target.value];
@@ -45,14 +49,15 @@ export default function SignUp() {
       formSub();
       async function formSub() {
         try {
-          await axios.post("https://qdemy.onrender.com/api/user/", {
+          const res = await axios.post("https://qdemy.onrender.com/api/user/", {
             ...user,
             password: user.pass1,
           });
-          NotifyS("user Created successfully ");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
+          console.log(res);
+          setLoading(false);
+          alert("Verification Mail Send ,Check Inbox and Spam Folder ");
+
+          navigate("/login");
         } catch (err) {
           setLoading(false);
           NotifyE("user name or email already exist");
@@ -70,7 +75,7 @@ export default function SignUp() {
   return (
     <>
       <Authnavbar />
-      <ToastContainer position={toast.POSITION.TOP_CENTER} autoClose={3000} />
+      <ToastContainer position={toast.POSITION.TOP_CENTER} />
       <section className="vh-100" style={{ backgroundColor: "#eee" }}>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
