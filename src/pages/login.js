@@ -18,6 +18,17 @@ export default function Login() {
   const Notify = () => {
     toast.error("email or password incorrect");
   };
+  let delay_toast;
+  const serverDelay = () => {
+    delay_toast = toast.info(
+      "⌛️Server may take some time to start since it's a free server⚠️",
+      {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 5555,
+        // No autoClose option, the notification won't close automatically
+      }
+    );
+  };
   function formchange(event) {
     const [name, value] = [event.target.name, event.target.value];
     setCred((prev) => ({ ...prev, [name]: value }));
@@ -35,6 +46,8 @@ export default function Login() {
   function formsubmitted(e) {
     e.preventDefault();
     setLoading(true);
+
+    serverDelay();
 
     axios
       .post("https://qdemy.onrender.com/api/user/auth", cred)
@@ -58,7 +71,7 @@ export default function Login() {
 
       .catch((error) => {
         setLoading(false);
-
+        toast.dismiss(delay_toast);
         if (error.response) {
           console.error("Error Status:", error.response.status);
           console.error("Error Data:", error.response.data);
@@ -124,14 +137,11 @@ export default function Login() {
 
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       {loading ? (
-                        <ClipLoader loading={loading} />
+                        <>
+                          <ClipLoader loading={loading} />
+                        </>
                       ) : (
-                        <button
-                          className="btn btn-dark btn-lg"
-                          onClick={formsubmitted}
-                        >
-                          Login
-                        </button>
+                        <button className="btn btn-dark btn-lg">Login</button>
                       )}
                     </div>
                   </form>
